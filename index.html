@@ -1,0 +1,1900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TurfLyf - Book Your Turf</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary-color: #4CAF50;
+            --primary-dark: #388E3C;
+            --primary-light: #A5D6A7;
+            --text-color: #333;
+            --light-text: #777;
+            --white: #fff;
+            --black: #000;
+            --light-bg: #f9f9f9;
+            --dark-bg: #1a1a1a;
+            --gray-bg: #f5f5f5;
+            --border-color: #e0e0e0;
+            --transition: all 0.3s ease;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 4px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            position: relative;
+            text-transform: uppercase;
+        }
+
+        .section-title.centered {
+            text-align: center;
+        }
+
+        .dot {
+            color: var(--primary-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--white);
+            color: var(--primary-color);
+        }
+
+        /* Header Styles */
+        header {
+            height: 100vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1575361204480-aadea25e6e68?q=80&w=1000');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .logo h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .hamburger .line {
+            width: 25px;
+            height: 3px;
+            background-color: var(--white);
+            margin: 5px 0;
+            transition: var(--transition);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: 5px;
+        }
+
+        .hero-quote {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .animated-btn {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* About Section Styles */
+        .about-section {
+            padding: 100px 0;
+            background-color: var(--white);
+        }
+
+        .about-section .container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hexagon {
+            width: 300px;
+            height: 260px;
+            background-color: var(--primary-color);
+            position: relative;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hexagon-inner {
+            width: 80%;
+            height: 80%;
+            background-color: white;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        }
+
+        .about-text {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .about-text strong {
+            color: var(--primary-color);
+        }
+
+        .cta-text {
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        /* Image Slider Styles */
+        .slider-section {
+            padding: 100px 0;
+            background-color: var(--gray-bg);
+            position: relative;
+        }
+
+        .slider-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 500px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+            cursor: pointer;
+            z-index: 10;
+            transition: var(--transition);
+        }
+
+        .slider-arrow:hover {
+            background-color: var(--white);
+        }
+
+        .slider-arrow.prev {
+            left: 20px;
+        }
+
+        .slider-arrow.next {
+            right: 20px;
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .slider-dot.active {
+            background-color: var(--primary-color);
+        }
+
+        /* Services Section Styles */
+        .services-section {
+            padding: 100px 0;
+            background-color: var(--white);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .service-card {
+            background-color: var(--gray-bg);
+            border-radius: var(--border-radius);
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+        }
+
+        .service-icon i {
+            font-size: 2rem;
+            color: var(--primary-dark);
+        }
+
+        .service-card h3 {
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .service-card p {
+            margin-bottom: 20px;
+            color: var(--light-text);
+        }
+
+        .btn-link {
+            color: var(--primary-color);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .btn-link i {
+            margin-left: 8px;
+            transition: var(--transition);
+        }
+
+        .btn-link:hover {
+            color: var(--primary-dark);
+        }
+
+        .btn-link:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Advanced Booking Section Styles */
+        .advanced-booking-section {
+            padding: 100px 0;
+            background-color: var(--gray-bg);
+        }
+
+        .sport-selection {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .sport-option {
+            background-color: var(--white);
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            width: 180px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .sport-option:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .sport-option.active {
+            border-color: var(--primary-color);
+            background-color: var(--primary-light);
+        }
+
+        .sport-option img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+
+        .sport-option h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .booking-calendar {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            display: none;
+        }
+
+        .booking-calendar.active {
+            display: block;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .calendar-nav {
+            display: flex;
+            gap: 10px;
+        }
+
+        .calendar-nav button {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .time-slot {
+            padding: 15px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .time-slot.available {
+            background-color: var(--primary-light);
+            border: 1px solid var(--primary-color);
+        }
+
+        .time-slot.booked {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            cursor: not-allowed;
+        }
+
+        .time-slot.selected {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .time-slot.available:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .booking-details {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            display: none;
+        }
+
+        .booking-details.active {
+            display: block;
+        }
+
+        .booking-summary {
+            margin-bottom: 30px;
+        }
+
+        .booking-summary h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .summary-total {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            position: relative;
+            transform: translateY(-50px);
+            transition: var(--transition);
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--light-text);
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            color: var(--text-color);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .payment-options {
+            margin-bottom: 20px;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .payment-option:hover {
+            background-color: var(--light-bg);
+        }
+
+        .payment-option.selected {
+            border-color: var(--primary-color);
+            background-color: var(--primary-light);
+        }
+
+        .payment-option input {
+            margin-right: 10px;
+        }
+
+        .payment-form {
+            margin-top: 20px;
+        }
+
+        .form-row {
+            margin-bottom: 15px;
+        }
+
+        .form-row label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-row input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+        }
+
+        .card-details {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 10px;
+        }
+
+        /* Gallery Section Styles */
+        .gallery-section {
+            padding: 100px 0;
+            background-color: var(--white);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            height: 250px;
+            box-shadow: var(--shadow);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Testimonials Section Styles */
+        .testimonials-section {
+            padding: 100px 0;
+            background-color: var(--dark-bg);
+            color: var(--white);
+        }
+
+        .testimonial-slider {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial-slide {
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .quote-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .testimonial-text {
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+        }
+
+        /* Locations Section Styles */
+        .locations-section {
+            padding: 100px 0;
+            background-color: var(--gray-bg);
+        }
+
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .location-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .map-container {
+            height: 250px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .location-info {
+            padding: 30px;
+        }
+
+        .location-info h3 {
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .address {
+            color: var(--light-text);
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        .facility-info p {
+            margin-bottom: 10px;
+        }
+
+        .facility-info i {
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+
+        /* Contact Section Styles */
+        .contact-section {
+            padding: 100px 0;
+            background-color: var(--white);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-top: 50px;
+        }
+
+        .contact-form {
+            background-color: var(--gray-bg);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .contact-info {
+            padding: 40px;
+        }
+
+        .info-item {
+            display: flex;
+            margin-bottom: 30px;
+        }
+
+        .info-item i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-right: 20px;
+            margin-top: 5px;
+        }
+
+        .info-item h3 {
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: var(--dark-bg);
+            color: var(--white);
+            padding: 80px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-quote {
+            font-style: italic;
+            margin-bottom: 20px;
+            max-width: 300px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icon {
+            color: var(--white);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .social-icon:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #aaa;
+            transition: var(--transition);
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-to-top {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .back-to-top:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .about-section .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-logo {
+                margin-bottom: 30px;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: var(--dark-bg);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: var(--transition);
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .hamburger {
+                display: block;
+                z-index: 1000;
+            }
+            
+            .hamburger.active .line:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            
+            .hamburger.active .line:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active .line:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+            
+            .cta-buttons {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .locations-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .slider-arrow {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .testimonial-text {
+                font-size: 1.2rem;
+            }
+
+            .slider-arrow {
+                width: 30px;
+                height: 30px;
+                font-size: 1rem;
+            }
+
+            .slide {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header id="home">
+        <nav>
+            <div class="logo">
+                <h1>TURFLYF</h1>
+            </div>
+            <div class="cta-buttons">
+                <a href="tel:+1234567890" class="btn btn-outline">CALL NOW</a>
+                <a href="#locations" class="btn btn-outline">GET DIRECTIONS</a>
+            </div>
+            <div class="nav-links">
+                <a href="#home" class="active">HOME</a>
+                <a href="#about">ABOUT</a>
+                <a href="#services">SERVICES</a>
+                <a href="#booking">BOOKING</a>
+                <a href="#gallery">GALLERY</a>
+                <a href="#contact">CONTACT</a>
+            </div>
+            <div class="hamburger">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </nav>
+        <div class="hero-content">
+            <h2 class="hero-title">TURFLYF — PLAY ON</h2>
+            <p class="hero-quote">"We do not stop playing because we get old. We get old because we stop playing."</p>
+            <a href="#booking" class="btn btn-primary animated-btn">BOOK NOW</a>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-logo">
+                <div class="hexagon">
+                    <div class="hexagon-inner"></div>
+                </div>
+            </div>
+            <div class="about-content">
+                <h2 class="section-title">ABOUT TURFLYF<span class="dot">.</span></h2>
+                <p class="about-text">
+                    <strong>TurfLyf</strong> is an active platform looking to encourage maximum participation from people towards sports and fitness initiatives.
+                </p>
+                <p class="about-text">
+                    Sports is inside each one of you; it just needs a bit of motivation, a word of encouragement! Our mission is to provide state of the art multi-sports astro turf grounds which facilitate sports such as cricket, football, volleyball, handball; activities such as yoga, crossfit training, football coaching; events such as birthday parties, corporate team building, tournaments; along with providing high performance sporting apparels and merchandise, exhilarating active experiences, and coaching for grassroots development.
+                </p>
+                <p class="about-text cta-text">
+                    Call us now for bookings and inquiries. Play On!!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Slider Section -->
+    <section class="slider-section">
+        <div class="container">
+            <h2 class="section-title centered">EXPERIENCE TURFLYF<span class="dot">.</span></h2>
+            <div class="slider-container">
+                <div class="slider">
+                    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1459865264687-595d652de67e?q=80&w=1000');"></div>
+                    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?q=80&w=1000');"></div>
+                    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1518604666860-9ed391f76460?q=80&w=1000');"></div>
+                </div>
+                <div class="slider-arrow prev">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="slider-arrow next">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+            <div class="slider-dots">
+                <div class="slider-dot active"></div>
+                <div class="slider-dot"></div>
+                <div class="slider-dot"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <h2 class="section-title centered">OUR SERVICES<span class="dot">.</span></h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-futbol"></i>
+                    </div>
+                    <h3>TURFLYF ARENA</h3>
+                    <p>Multi-sport astro turf ground</p>
+                    <a href="#booking" class="btn-link">Book Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-running"></i>
+                    </div>
+                    <h3>TURFLYF ACTIVE</h3>
+                    <p>Promoting health & fitness through active programs, apparels and equipments.</p>
+                    <a href="#booking" class="btn-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3>SPORTS COACHING</h3>
+                    <p>Promoting grassroots development</p>
+                    <a href="#booking" class="btn-link">Join Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advanced Booking Section -->
+    <section id="booking" class="advanced-booking-section">
+        <div class="container">
+            <h2 class="section-title centered">BOOK YOUR TURF<span class="dot">.</span></h2>
+            <p style="text-align: center; margin-bottom: 30px;">Select your sport to view available slots</p>
+            
+            <div class="sport-selection">
+                <div class="sport-option" data-sport="football">
+                    <img src="https://images.unsplash.com/photo-1575361204480-aadea25e6e68?q=80&w=1000&h=1000&fit=crop" alt="Football">
+                    <h3>Football</h3>
+                </div>
+                <div class="sport-option" data-sport="cricket">
+                    <img src="https://images.unsplash.com/photo-1531415074968-036ba1b575da?q=80&w=1000&h=1000&fit=crop" alt="Cricket">
+                    <h3>Cricket</h3>
+                </div>
+                <div class="sport-option" data-sport="pickleball">
+                    <img src="pickleball.jpeg" alt="Pickleball">
+                    <h3>Pickleball</h3>
+                </div>
+                <div class="sport-option" data-sport="volleyball">
+                    <img src="turf volleyball.jpg" alt="Volleyball">
+                    <h3>Volleyball</h3>
+                </div>
+            </div>
+            
+            <div id="footballCalendar" class="booking-calendar" data-sport="football">
+                <div class="calendar-header">
+                    <h3>Football - Available Slots</h3>
+                    <div class="calendar-nav">
+                        <button class="prev-day"><i class="fas fa-chevron-left"></i></button>
+                        <span class="current-date">Today</span>
+                        <button class="next-day"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                <div class="time-slots">
+                    <div class="time-slot available" data-time="06:00" data-price="800">
+                        <p>6:00 AM - 7:00 AM</p>
+                        <p>₹800</p>
+                    </div>
+                    <div class="time-slot available" data-time="07:00" data-price="800">
+                        <p>7:00 AM - 8:00 AM</p>
+                        <p>₹800</p>
+                    </div>
+                    <div class="time-slot booked">
+                        <p>8:00 AM - 9:00 AM</p>
+                        <p>Booked</p>
+                    </div>
+                    <div class="time-slot available" data-time="17:00" data-price="1200">
+                        <p>5:00 PM - 6:00 PM</p>
+                        <p>₹1200</p>
+                    </div>
+                    <div class="time-slot booked">
+                        <p>6:00 PM - 7:00 PM</p>
+                        <p>Booked</p>
+                    </div>
+                    <div class="time-slot available" data-time="19:00" data-price="1200">
+                        <p>7:00 PM - 8:00 PM</p>
+                        <p>₹1200</p>
+                    </div>
+                    <div class="time-slot available" data-time="20:00" data-price="1200">
+                        <p>8:00 PM - 9:00 PM</p>
+                        <p>₹1200</p>
+                    </div>
+                    <div class="time-slot available" data-time="21:00" data-price="1000">
+                        <p>9:00 PM - 10:00 PM</p>
+                        <p>₹1000</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="cricketCalendar" class="booking-calendar" data-sport="cricket">
+                <div class="calendar-header">
+                    <h3>Cricket - Available Slots</h3>
+                    <div class="calendar-nav">
+                        <button class="prev-day"><i class="fas fa-chevron-left"></i></button>
+                        <span class="current-date">Today</span>
+                        <button class="next-day"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                <div class="time-slots">
+                    <div class="time-slot booked">
+                        <p>6:00 AM - 7:00 AM</p>
+                        <p>Booked</p>
+                    </div>
+                    <div class="time-slot available" data-time="07:00" data-price="1000">
+                        <p>7:00 AM - 8:00 AM</p>
+                        <p>₹1000</p>
+                    </div>
+                    <div class="time-slot available" data-time="08:00" data-price="1000">
+                        <p>8:00 AM - 9:00 AM</p>
+                        <p>₹1000</p>
+                    </div>
+                    <div class="time-slot available" data-time="17:00" data-price="1500">
+                        <p>5:00 PM - 6:00 PM</p>
+                        <p>₹1500</p>
+                    </div>
+                    <div class="time-slot available" data-time="18:00" data-price="1500">
+                        <p>6:00 PM - 7:00 PM</p>
+                        <p>₹1500</p>
+                    </div>
+                    <div class="time-slot booked">
+                        <p>7:00 PM - 8:00 PM</p>
+                        <p>Booked</p>
+                    </div>
+                    <div class="time-slot booked">
+                        <p>8:00 PM - 9:00 PM</p>
+                        <p>Booked</p>
+                    </div>
+                    <div class="time-slot available" data-time="21:00" data-price="1200">
+                        <p>9:00 PM - 10:00 PM</p>
+                        <p>₹1200</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="pickleballCalendar" class="booking-calendar" data-sport="pickleball">
+                <div class="calendar-header">
+                    <h3>Pickleball - Available Slots</h3>
+                    <div class="calendar-nav">
+                        <button class="prev-day"><i class="fas fa-chevron-left"></i></button>
+                        <span class="current-date">Today</span>
+                        <button class="next-day"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                <div class="time-slots">
+                    <div class="time-slot available" data-time="06:00" data-price="600">
+                        <p>6:00 AM - 7:00 AM</p>
+                        <p>₹600</p>
+                    </div>
+                    <div class="time-slot available" data-time="07:00" data-price="600">
+                        <p>7:00 AM - 8:00 AM</p>
+                        <p>₹600</p>
+                    </div>
+                    <div class="time-slot available" data-time="08:00" data-price="600">
+                        <p>8:00 AM - 9:00 AM</p>
+                        <p>₹600</p>
+                    </div>
+                    <div class="time-slot booked">
+                        <p>5:00 PM - 6:00 PM</p>
+                        <p>Booked</p>
+                    </div>
+                    <div class="time-slot available" data-time="18:00" data-price="800">
+                        <p>6:00 PM - 7:00 PM</p>
+                        <p>₹800</p>
+                    </div>
+                    <div class="time-slot available" data-time="19:00" data-price="800">
+                        <p>7:00 PM - 8:00 PM</p>
+                        <p>₹800</p>
+                    </div>
+                    <div class="time-slot available" data-time="20:00" data-price="800">
+                        <p>8:00 PM - 9:00 PM</p>
+                        <p>₹800</p>
+                    </div>
+                    <div class="time-slot available" data-time="21:00" data-price="700">
+                        <p>9:00 PM - 10:00 PM</p>
+                        <p>₹700</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="volleyballCalendar" class="booking-calendar" data-sport="volleyball">
+                <div class="calendar-header">
+                    <h3>Volleyball - Available Slots</h3>
+                    <div class="calendar-nav">
+                        <button class="prev-day"><i class="fas fa-chevron-left"></i></button>
+                        <span class="current-date">Today</span>
+                        <button class="next-day"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                <div class="time-slots">
+                    <div class="time-slot available" data-time="06:00" data-price="700">
+                        <p>6:00 AM - 7:00 AM</p>
+                        <p>₹700</p>
+                    </div>
+                    <div class="time-slot booked">
+                        <p>7:00 AM - 8:00 AM</p>
+                        <p>Booked</p>
+                    </div>
+                    <div class="time-slot available" data-time="08:00" data-price="700">
+                        <p>8:00 AM - 9:00 AM</p>
+                        <p>₹700</p>
+                    </div>
+                    <div class="time-slot available" data-time="17:00" data-price="900">
+                        <p>5:00 PM - 6:00 PM</p>
+                        <p>₹900</p>
+                    </div>
+                    <div class="time-slot available" data-time="18:00" data-price="900">
+                        <p>6:00 PM - 7:00 PM</p>
+                        <p>₹900</p>
+                    </div>
+                    <div class="time-slot available" data-time="19:00" data-price="900">
+                        <p>7:00 PM - 8:00 PM</p>
+                        <p>₹900</p>
+                    </div>
+                    <div class="time-slot booked">
+                        <p>8:00 PM - 9:00 PM</p>
+                        <p>Booked</p>
+                    </div>
+                    <div class="time-slot available" data-time="21:00" data-price="800">
+                        <p>9:00 PM - 10:00 PM</p>
+                        <p>₹800</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="booking-details">
+                <div class="booking-summary">
+                    <h3>Booking Summary</h3>
+                    <div class="summary-item">
+                        <span>Sport:</span>
+                        <span id="summaryType"></span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Date:</span>
+                        <span id="summaryDate"></span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Time:</span>
+                        <span id="summaryTime"></span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Base Price:</span>
+                        <span id="summaryPrice"></span>
+                    </div>
+                    <div class="summary-item">
+                        <span>GST (18%):</span>
+                        <span id="summaryTax"></span>
+                    </div>
+                    <div class="summary-total">
+                        <span>Total:</span>
+                        <span id="summaryTotal"></span>
+                    </div>
+                </div>
+                <button id="proceedToPayment" class="btn btn-primary">Proceed to Payment</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <h2 class="section-title centered">GALLERY<span class="dot">.</span></h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="gallery img 1.jpeg" alt="Children playing football">
+                </div>
+                <div class="gallery-item">
+                    <img src="gallery img2.jpg" alt="Kids cricket match">
+                </div>
+                <div class="gallery-item">
+                    <img src="gallery img3.jpeg" alt="Pickleball court">
+                </div>
+                <div class="gallery-item">
+                    <img src="gallery img4.jpeg" alt="Children playing volleyball">
+                </div>
+                <div class="gallery-item">
+                    <img src="gallery img5.jpeg" alt="Kids football training">
+                </div>
+                <div class="gallery-item">
+                    <img src="volleyball.jpeg" alt="Children enjoying sports">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials-section">
+        <div class="container">
+            <div class="testimonial-slider">
+                <div class="testimonial-slide">
+                    <div class="quote-icon">
+                        <i class="fas fa-quote-right"></i>
+                    </div>
+                    <p class="testimonial-text">Book It. Play It. Live It.</p>
+                    <p class="testimonial-author">- Aryan Mali</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Locations Section -->
+    <section id="locations" class="locations-section">
+        <div class="container">
+            <h2 class="section-title centered">LOCATIONS<span class="dot">.</span></h2>
+            <div class="locations-grid">
+                <div class="location-card">
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241317.11609823277!2d72.74109995709657!3d19.08219783958221!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c6306644edc1%3A0x5da4ed8f8d648c69!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1682669880037!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                    <div class="location-info">
+                        <h3>TURFLYF ARENA (MUMBAI - I)</h3>
+                        <p class="address">108, Rd Number 1, Chembur West, Sector 3, Chedda Nagar, Mumbai, Maharashtra 400089, India</p>
+                        <div class="facility-info">
+                            <p><i class="fas fa-futbol"></i> Two turf grounds available for booking.</p>
+                            <p><i class="fas fa-shower"></i> Bathrooms & changing room available.</p>
+                            <p><i class="fas fa-toolbox"></i> Equipment provided for Cricket, Football, Volleyball.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-card">
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d242118.14200802278!2d73.72287747484398!3d18.524564859944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf2e67461101%3A0x828d43bf9d9ee343!2sPune%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1682669937662!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                    <div class="location-info">
+                        <h3>TURFLYF ARENA (PUNE)</h3>
+                        <p class="address">Phase 1, Hinjewadi, Pune, Maharashtra 411057, India</p>
+                        <div class="facility-info">
+                            <p><i class="fas fa-futbol"></i> One turf ground available for booking.</p>
+                            <p><i class="fas fa-shower"></i> Bathrooms & changing room available.</p>
+                            <p><i class="fas fa-toolbox"></i> Equipment provided for Cricket, Football, Volleyball.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title centered">CONTACT US<span class="dot">.</span></h2>
+            <div class="contact-container">
+                <form id="contactForm" class="contact-form">
+                    <div class="form-group">
+                        <label for="contactName">Your Name</label>
+                        <input type="text" id="contactName" name="contactName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail">Email</label>
+                        <input type="email" id="contactEmail" name="contactEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactPhone">Phone Number</label>
+                        <input type="tel" id="contactPhone" name="contactPhone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactMessage">Message</label>
+                        <textarea id="contactMessage" name="contactMessage" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+                <div class="contact-info">
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Head Office</h3>
+                            <p>123 Sports Avenue, Tech Park, Bangalore, Karnataka, India 560066</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <h3>Phone</h3>
+                            <p>+91 98765 43210</p>
+                            <p>+91 98765 43211</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email</h3>
+                            <p>contact@turflyf.co.in</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Modal -->
+    <div class="modal-overlay" id="paymentModal">
+        <div class="modal">
+            <div class="modal-close" id="closeModal">
+                <i class="fas fa-times"></i>
+            </div>
+            <h3 class="modal-title">Payment Details</h3>
+            <div class="payment-options">
+                <div class="payment-option selected">
+                    <input type="radio" name="payment" id="card" checked>
+                    <label for="card">Credit/Debit Card</label>
+                </div>
+                <div class="payment-option">
+                    <input type="radio" name="payment" id="upi">
+                    <label for="upi">UPI</label>
+                </div>
+                <div class="payment-option">
+                    <input type="radio" name="payment" id="netbanking">
+                    <label for="netbanking">Net Banking</label>
+                </div>
+            </div>
+            <div class="payment-form">
+                <div class="form-row">
+                    <label for="cardName">Name on Card</label>
+                    <input type="text" id="cardName" placeholder="John Doe">
+                </div>
+                <div class="form-row">
+                    <label for="cardNumber">Card Number</label>
+                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456">
+                </div>
+                <div class="card-details">
+                    <div class="form-row">
+                        <label for="expiry">Expiry Date</label>
+                        <input type="text" id="expiry" placeholder="MM/YY">
+                    </div>
+                    <div class="form-row">
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" placeholder="123">
+                    </div>
+                </div>
+                <button class="btn btn-primary" id="completePayment">Pay Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>TURFLYF</h2>
+                    <p class="footer-quote">"We do not stop playing because we get old. We get old because we stop playing."</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>COMPANY</h3>
+                        <ul>
+                            <li><a href="#about">About Company</a></li>
+                            <li><a href="#locations">Locations</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>SERVICES</h3>
+                        <ul>
+                            <li><a href="#services">TurfLyf Arena</a></li>
+                            <li><a href="#services">TurfLyf Active</a></li>
+                            <li><a href="#services">TurfLyf Coaching</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>CONTACT</h3>
+                        <p>123 Sports Avenue, Tech Park, Bangalore, Karnataka, India 560066</p>
+                        <p><a href="mailto:contact@turflyf.co.in">contact@turflyf.co.in</a></p>
+                        <p><a href="tel:+919876543210">+91 98765 43210</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2023 TurfLyf by PlayOn Management. All Rights Reserved.</p>
+                <a href="#home" class="back-to-top">
+                    <i class="fas fa-arrow-up"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a nav link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Image Slider
+        const slider = document.querySelector('.slider');
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.querySelector('.slider-arrow.prev');
+        const nextBtn = document.querySelector('.slider-arrow.next');
+        const dots = document.querySelectorAll('.slider-dot');
+        
+        let currentSlide = 0;
+        const slideCount = slides.length;
+        
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update dots
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+        
+        prevBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+            updateSlider();
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % slideCount;
+            updateSlider();
+        });
+        
+        // Dot navigation
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentSlide = index;
+                updateSlider();
+            });
+        });
+        
+        // Auto slide every 5 seconds
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % slideCount;
+            updateSlider();
+        }, 5000);
+
+        // Advanced Booking System
+        const sportOptions = document.querySelectorAll('.sport-option');
+        const bookingCalendars = document.querySelectorAll('.booking-calendar');
+        const bookingDetails = document.querySelector('.booking-details');
+        const timeSlots = document.querySelectorAll('.time-slot.available');
+        const proceedToPaymentBtn = document.getElementById('proceedToPayment');
+        const paymentModal = document.getElementById('paymentModal');
+        const closeModalBtn = document.getElementById('closeModal');
+        const completePaymentBtn = document.getElementById('completePayment');
+        
+        // Sport selection
+        sportOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                // Remove active class from all options
+                sportOptions.forEach(opt => opt.classList.remove('active'));
+                
+                // Add active class to clicked option
+                option.classList.add('active');
+                
+                // Hide all calendars
+                bookingCalendars.forEach(calendar => calendar.classList.remove('active'));
+                
+                // Show the calendar for the selected sport
+                const sport = option.dataset.sport;
+                const calendar = document.querySelector(`.booking-calendar[data-sport="${sport}"]`);
+                calendar.classList.add('active');
+                
+                // Hide booking details
+                bookingDetails.classList.remove('active');
+            });
+        });
+        
+        // Time slot selection
+        timeSlots.forEach(slot => {
+            slot.addEventListener('click', () => {
+                // Remove selected class from all slots
+                timeSlots.forEach(s => s.classList.remove('selected'));
+                
+                // Add selected class to clicked slot
+                slot.classList.add('selected');
+                
+                // Show booking details
+                bookingDetails.classList.add('active');
+                
+                // Update booking summary
+                const sport = document.querySelector('.sport-option.active').dataset.sport;
+                const sportName = document.querySelector('.sport-option.active h3').textContent;
+                const time = slot.querySelector('p').textContent;
+                const price = parseInt(slot.dataset.price);
+                const tax = price * 0.18;
+                const total = price + tax;
+                
+                document.getElementById('summaryType').textContent = sportName;
+                document.getElementById('summaryDate').textContent = new Date().toLocaleDateString();
+                document.getElementById('summaryTime').textContent = time;
+                document.getElementById('summaryPrice').textContent = `₹${price}`;
+                document.getElementById('summaryTax').textContent = `₹${tax.toFixed(2)}`;
+                document.getElementById('summaryTotal').textContent = `₹${total.toFixed(2)}`;
+            });
+        });
+        
+        // Payment modal
+        proceedToPaymentBtn.addEventListener('click', () => {
+            paymentModal.classList.add('active');
+        });
+        
+        closeModalBtn.addEventListener('click', () => {
+            paymentModal.classList.remove('active');
+        });
+        
+        // Close modal when clicking outside
+        paymentModal.addEventListener('click', (e) => {
+            if (e.target === paymentModal) {
+                paymentModal.classList.remove('active');
+            }
+        });
+        
+        // Payment options
+        const paymentOptions = document.querySelectorAll('.payment-option');
+        
+        paymentOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                // Remove selected class from all options
+                paymentOptions.forEach(opt => opt.classList.remove('selected'));
+                
+                // Add selected class to clicked option
+                option.classList.add('selected');
+                
+                // Check the radio button
+                const radio = option.querySelector('input[type="radio"]');
+                radio.checked = true;
+            });
+        });
+        
+        // Complete payment
+        completePaymentBtn.addEventListener('click', () => {
+            alert('Payment successful! Your booking has been confirmed.');
+            paymentModal.classList.remove('active');
+            
+            // Reset the form
+            timeSlots.forEach(slot => slot.classList.remove('selected'));
+            bookingDetails.classList.remove('active');
+        });
+
+        // Form Validation and Submission
+        const contactForm = document.getElementById('contactForm');
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Basic form validation
+                const formData = new FormData(this);
+                let isValid = true;
+                
+                for (const [key, value] of formData.entries()) {
+                    if (!value) {
+                        isValid = false;
+                        break;
+                    }
+                }
+                
+                if (isValid) {
+                    // Show success message (in a real app, you would send this data to a server)
+                    alert('Message sent successfully! We will get back to you as soon as possible.');
+                    this.reset();
+                } else {
+                    alert('Please fill in all required fields.');
+                }
+            });
+        }
+
+        // Add active class to nav links based on scroll position
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY;
+            
+            // Add active class to nav links based on scroll position
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
